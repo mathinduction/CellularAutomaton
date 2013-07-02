@@ -12,7 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using CellularAutomaton.Automaton;
+using CellularAutomaton.Rules;
+using Grid = CellularAutomaton.Graphics.Grid;
 
 namespace CellularAutomaton
 {
@@ -21,27 +22,63 @@ namespace CellularAutomaton
 	/// </summary>
 	public partial class MainWindow : Window
 	{
+#region Private
+
+		/// <summary>
+		/// Текущее правило
+		/// </summary>
+		private IRule _currentRule;
+
+		/// <summary>
+		/// Ширина области
+		/// </summary>
+		private int _width = 10;
+		/// <summary>
+		/// Высота области
+		/// </summary>
+		private int _height = 10;
+		/// <summary>
+		/// Размер клетки
+		/// </summary>
+		private int _cellSize = 5;
+
+		/// <summary>
+		/// Сетка
+		/// </summary>
+		private Graphics.Grid _grid;
+#endregion
 		public MainWindow()
 		{
 			InitializeComponent();
 
-			int [,] cells = new int[4,5];
-			cells[0, 0] = 1;
-			cells[1, 1] = 1;
-			cells[1, 3] = 1;
-			cells[1, 4] = 1;
-			cells[2, 2] = 1;
-			cells[2, 3] = 1;
-			cells[2, 4] = 1;
-			cells[3, 1] = 1;
+			_grid = new Grid(_width, _height);
 
-			AutomatonLife _life = new AutomatonLife();
-			cells = _life.NextState(cells);
+			comboBoxRule.ItemsSource = Info.RuleNames;
+			comboBoxRule.SelectedIndex = 0;
+
+			comboBoxSurroundingType.ItemsSource = Info.SurroundingNames;
+			comboBoxSurroundingType.SelectedIndex = 0;
+
+			textBoxGridHeight.Text = _height.ToString();
+			textBoxGridWidth.Text = _width.ToString();
+			textBoxCellSize.Text = _cellSize.ToString();
 		}
 
 		private void buttonCreateAutomaton_Click(object sender, RoutedEventArgs e)
 		{
 
+		}
+
+		private void comboBoxRule_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			_currentRule = Info.Rule((Info.eRules) comboBoxRule.SelectedIndex);
+			textBoxStateNumber.Text = _currentRule.StateNumber.ToString();
+			comboBoxSurroundingType.SelectedValue = _currentRule.SurroundingType;
+		}
+
+		private void comboBoxSurroundingType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			_currentRule.SurroundingType = (Info.eSurroundingType)comboBoxSurroundingType.SelectedIndex;
 		}
 
 	}

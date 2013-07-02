@@ -10,6 +10,13 @@ namespace CellularAutomaton.Rules
 	/// </summary>
 	public class RuleLife: IRule
 	{
+		public RuleLife()
+		{
+			_stateNumber = 2;
+			_stateNumberChangeable = false;
+			_surroundingType = Info.eSurroundingType.Type1;
+		}
+
 		public override int TransformCell(int[,] cells, int i, int j)
 		{
 			int centerCell = cells[i, j];

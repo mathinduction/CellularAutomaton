@@ -12,45 +12,45 @@
 
 		<Grid Grid.Column="1">
 			<Grid.RowDefinitions>
-				<RowDefinition />
-				<RowDefinition />
-				<RowDefinition />
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
 			</Grid.RowDefinitions>
 
 			<Grid Grid.Row="0">
 				<Grid.RowDefinitions>
-					<RowDefinition />
-					<RowDefinition />
-					<RowDefinition />
-					<RowDefinition />
-					<RowDefinition />
-					<RowDefinition />
-					<RowDefinition />
+					<RowDefinition  Height="Auto"/>
+					<RowDefinition  Height="Auto"/>
+					<RowDefinition  Height="Auto"/>
+					<RowDefinition  Height="Auto"/>
+					<RowDefinition  Height="Auto"/>
+					<RowDefinition  Height="Auto"/>
+					<RowDefinition  Height="Auto"/>
 				</Grid.RowDefinitions>
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition />
 					<ColumnDefinition />
 				</Grid.ColumnDefinitions>
 				
-				<TextBlock Grid.Row="0" Grid.Column="0" Margin="5">Клеточный автомат:</TextBlock>
-				<ComboBox Grid.Row="0" Grid.Column="1" Name="comboBoxAutomaton" Margin="5"></ComboBox>
-				
-				<Button Grid.Row="1" Grid.Column="1" Name="buttonCreateAutomaton" Margin="5" Width="110" Height="25" Click="buttonCreateAutomaton_Click">Создать</Button>
+				<TextBlock Grid.Row="0" Grid.Column="0" Height="25" Margin="5">Клеточный автомат:</TextBlock>
+				<ComboBox Grid.Row="0" Grid.Column="1" Name="comboBoxRule" Height="25" Margin="5" SelectionChanged="comboBoxRule_SelectionChanged"></ComboBox>
 
-				<TextBlock Grid.Row="2" Grid.Column="0" Margin="5">Число состояний:</TextBlock>
-				<TextBox Grid.Row="2" Grid.Column="1" Name="textBoxStateNumber" Margin="5"></TextBox>
+				<Button Grid.Row="1" Grid.Column="1" Name="buttonCreateRule" Margin="5" Width="110" Height="25" Click="buttonCreateAutomaton_Click">Создать</Button>
 
-				<TextBlock Grid.Row="3" Grid.Column="0" Margin="5">Тип области:</TextBlock>
-				<ComboBox Grid.Row="3" Grid.Column="1" Name="comboBoxSurroundingType" Margin="5"></ComboBox>
+				<TextBlock Grid.Row="2" Grid.Column="0" Height="25" Margin="5">Число состояний:</TextBlock>
+				<TextBox Grid.Row="2" Grid.Column="1" Name="textBoxStateNumber" Height="25" Margin="5"></TextBox>
 
-				<TextBlock Grid.Row="4" Grid.Column="0" Margin="5">Ширина поля:</TextBlock>
-				<TextBox Grid.Row="4" Grid.Column="1" Name="textBoxGridWidth" Margin="5"></TextBox>
+				<TextBlock Grid.Row="3" Grid.Column="0" Height="25" Margin="5">Тип области:</TextBlock>
+				<ComboBox Grid.Row="3" Grid.Column="1" Name="comboBoxSurroundingType" Height="25" Margin="5" SelectionChanged="comboBoxSurroundingType_SelectionChanged"></ComboBox>
 
-				<TextBlock Grid.Row="5" Grid.Column="0" Margin="5">Высота поля:</TextBlock>
-				<TextBox Grid.Row="5" Grid.Column="1" Name="textBoxGridHeight" Margin="5"></TextBox>
+				<TextBlock Grid.Row="4" Grid.Column="0" Height="25" Margin="5">Ширина поля:</TextBlock>
+				<TextBox Grid.Row="4" Grid.Column="1" Name="textBoxGridWidth" Height="25" Margin="5"></TextBox>
 
-				<TextBlock Grid.Row="6" Grid.Column="0" Margin="5">Размер ячейки:</TextBlock>
-				<TextBox Grid.Row="6" Grid.Column="1" Name="textBoxCellSize" Margin="5"></TextBox>
+				<TextBlock Grid.Row="5" Grid.Column="0" Height="25" Margin="5">Высота поля:</TextBlock>
+				<TextBox Grid.Row="5" Grid.Column="1" Name="textBoxGridHeight" Height="25" Margin="5"></TextBox>
+
+				<TextBlock Grid.Row="6" Grid.Column="0" Height="25" Margin="5">Размер ячейки:</TextBlock>
+				<TextBox Grid.Row="6" Grid.Column="1" Name="textBoxCellSize" Height="25" Margin="5"></TextBox>
 			</Grid>
 
 			<StackPanel Grid.Row="1" Name="stackPanelColors">

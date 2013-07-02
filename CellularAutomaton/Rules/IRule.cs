@@ -7,10 +7,12 @@ namespace CellularAutomaton.Rules
 {
 	public abstract class IRule
 	{
-		#region Private
+		#region Private and Protected
 
-		private int _stateNumber = 2;
-		private eSurroundingType _surroundingType = eSurroundingType.Type1;
+		protected int _stateNumber = 2;
+		protected bool _stateNumberChangeable = true;
+		protected Info.eSurroundingType _surroundingType = Info.eSurroundingType.Type1;
+		protected bool _surroundingTypeChangeable = true;
 
 		#endregion
 
@@ -23,19 +25,22 @@ namespace CellularAutomaton.Rules
 			get { return _stateNumber; }
 			set
 			{
+				if (!_stateNumberChangeable)
+				{
+					throw new Exception("Нельзя изменить число состояний!");
+				}
 				if (value < 2)
 				{
 					throw new Exception("Число состояний не может быть меньше 2х!");
 				}
-				else
-					_stateNumber = value;
+				_stateNumber = value;
 			}
 		}
 
 		/// <summary>
 		/// Тип области
 		/// </summary>
-		public eSurroundingType SurroundingType
+		public Info.eSurroundingType SurroundingType
 		{
 			set { _surroundingType = value; }
 			get { return _surroundingType; }
@@ -43,21 +48,6 @@ namespace CellularAutomaton.Rules
 		#endregion
 
 		#region Public
-
-		/// <summary>
-		/// Тип области
-		/// </summary>
-		public enum eSurroundingType//+++ TODO сделать нормальные названия
-		{
-			/// <summary>
-			/// 4 соседа
-			/// </summary>
-			Type1,
-			/// <summary>
-			/// 8 соседей
-			/// </summary>
-			Type2
-		}
 
 		/// <summary>
 		/// Метод для трансформации всех клеток поля
@@ -96,7 +86,7 @@ namespace CellularAutomaton.Rules
 			int iNorth = (i - 1 + length0) % length0;
 			int iSouth = (i + 1) % length0;
 
-			if (_surroundingType == eSurroundingType.Type1)
+			if (_surroundingType == Info.eSurroundingType.Type1)
 			{
 				int northCell = cells[iNorth, j];
 				int westCell = cells[i, jWest];
