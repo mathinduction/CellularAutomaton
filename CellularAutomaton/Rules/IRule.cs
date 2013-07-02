@@ -5,12 +5,12 @@ using System.Text;
 
 namespace CellularAutomaton.Rules
 {
-	class IRule
+	public abstract class IRule
 	{
 		#region Private
 
 		private int _stateNumber = 2;
-		private eSurroundingType _surroundingType;
+		private eSurroundingType _surroundingType = eSurroundingType.Type1;
 
 		#endregion
 
@@ -59,9 +59,69 @@ namespace CellularAutomaton.Rules
 			Type2
 		}
 
-		
+		/// <summary>
+		/// Метод для трансформации всех клеток поля
+		/// </summary>
+		public int[,] NextState(int[,] cells)
+		{
+			int length0 = cells.GetLength(0), length1 = cells.GetLength(1);
+			int[,] newCells = new int[length0, length1];
+
+			for (int i = 0; i < length0; i++)
+			{
+				for (int j = 0; j < length1; j++)
+				{
+					newCells[i, j] = TransformCell(cells, i, j);
+				}
+			}
+			return newCells;
+		}
+
+		/// <summary>
+		/// Метод для преобразования клетки с учётом её текущего состояния и состояния всех её соседей
+		/// </summary>
+		public abstract int TransformCell(int[,] cells, int i, int j);
+
 		#endregion
 
+		/// <summary>
+		/// Подсчитывает сумму состояний окружения
+		/// </summary>
+		/// <returns></returns>
+		protected int CountSurrounding(int[,] cells, int i, int j)
+		{
+			int length0 = cells.GetLength(0), length1 = cells.GetLength(1);
+			int jWest = (j - 1 + length1) % length1;
+			int jEast = (j + 1) % length1;
+			int iNorth = (i - 1 + length0) % length0;
+			int iSouth = (i + 1) % length0;
+
+			if (_surroundingType == eSurroundingType.Type1)
+			{
+				int northCell = cells[iNorth, j];
+				int westCell = cells[i, jWest];
+				int eastCell = cells[i, jEast];
+				int southCell = cells[iSouth, j];
+
+				return northCell + westCell + eastCell + southCell;
+			}
+			else
+			{
+				int northWestCell = cells[iNorth, jWest];
+				int northCell = cells[iNorth, j];
+				int northEastCell = cells[iNorth, jEast];
+
+				int westCell = cells[i, jWest];
+				int eastCell = cells[i, jEast];
+
+				int southWestCell = cells[iSouth, jWest];
+				int southCell = cells[iSouth, j];
+				int southEastCell = cells[iSouth, jEast];
+
+				return northWestCell + northCell + northEastCell +
+				       westCell + eastCell + southWestCell + southCell + southEastCell;
+			}
+		}
 		
 	}
 }
