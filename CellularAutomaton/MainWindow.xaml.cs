@@ -81,5 +81,15 @@ namespace CellularAutomaton
 			_currentRule.SurroundingType = (Info.eSurroundingType)comboBoxSurroundingType.SelectedIndex;
 		}
 
+		private void buttonAutoFill_Click(object sender, RoutedEventArgs e)
+		{
+			List<int> values = new List<int>();
+
+			for (int i = 0; i < _currentRule.StateNumber; i++ )//+++пока так, потом сделать считывание из правила..
+				values.Add(i);
+
+			_grid.RandomFill(values);
+		}
+
 	}
 }

@@ -63,8 +63,8 @@
 					<ColumnDefinition />
 				</Grid.ColumnDefinitions>
 
-				<Button Grid.Column="0" Margin="5" Width="110" Height="25">Авто-заполнение</Button>
-				<Button Grid.Column="1" Margin="5" Width="110" Height="25" Background="YellowGreen">Старт</Button>
+				<Button Grid.Column="0" Name="buttonAutoFill" Margin="5" Width="110" Height="25" Click="buttonAutoFill_Click">Авто-заполнение</Button>
+				<Button Grid.Column="1" Name="buttonStart" Margin="5" Width="110" Height="25" Background="YellowGreen">Старт</Button>
 			</Grid>
 			
 		</Grid>
